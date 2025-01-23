@@ -19,7 +19,7 @@ const TerminalContact = () => {
         onClick={() => {
           inputRef.current?.focus();
         }}
-        className="h-96 bg-slate-950/60 rounded-lg w-full max-w-2xl mx-auto overflow-y-scroll shadow-xl cursor-text font-fc ">
+        className="h-120 md:h-96 bg-slate-950/60 rounded-lg w-full md:max-w-2xl mx-auto overflow-y-scroll shadow-xl cursor-text font-fc ">
         <TerminalHeader />
         <TerminalBody inputRef={inputRef} containerRef={containerRef} />
       </div>
@@ -71,8 +71,8 @@ const TerminalBody = ({ containerRef, inputRef }) => {
         <span className="text-yellow-500">Approach:</span> bring team developing a tool to airdrop
         tokens for web-2 users based on their internet activity.
       </p>
-      <p>
-        <span onClick={onCopyCA} className="text-red-500 hover:cursor-pointer">
+      <p className="text-sm md:text-lg pt-6">
+        <span onClick={onCopyCA} className="text-red-500 text-lg hover:cursor-pointer">
           CA:
         </span>{' '}
         0x02E739740B007bd5E4600b9736A143b6E794D223

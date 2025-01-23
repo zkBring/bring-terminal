@@ -2,7 +2,7 @@
 import { Canvas } from '@react-three/fiber';
 import Text from './models/Text1';
 import Text2 from './models/Text2';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { OrbitControls } from '@react-three/drei';
 
 import Text3 from './models/Text3';
@@ -55,15 +55,17 @@ const App = () => {
   return (
     <>
       <div className="canvas-wrapper">
-        <Canvas gl={{ alpha: true }} style={{ background: 'black' }}>
-          <ambientLight intensity={0.5} />
-          <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-          <Text position={positions.text1} />
-          <Text2 position={positions.text2} />
-          <Text3 position={positions.text3} />
-          <Text4 position={positions.text4} />
-          <OrbitControls />
-        </Canvas>
+        <Suspense fallback={<p>Bring is loading</p>}>
+          <Canvas gl={{ alpha: true }} style={{ background: 'black' }}>
+            <ambientLight intensity={0.5} />
+            <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+            <Text position={positions.text1} />
+            <Text2 position={positions.text2} />
+            <Text3 position={positions.text3} />
+            <Text4 position={positions.text4} />
+            <OrbitControls />
+          </Canvas>
+        </Suspense>
       </div>
       <div className="terminal-wrapper">
         <TerminalContact />
