@@ -33,7 +33,7 @@ const TerminalHeader = () => {
       <div className="w-3 h-3 rounded-full bg-red-500" />
       <div className="w-3 h-3 rounded-full bg-yellow-500" />
       <div className="w-3 h-3 rounded-full bg-green-500" />
-      <span className="text-sm text-slate-200 font-semibold absolute left-[50%] -translate-x-[50%]">
+      <span className="text-xs md:text-md text-slate-200 font-semibold absolute left-[50%] -translate-x-[50%]">
         Bring, powered by zkTLS.
       </span>
     </div>
@@ -42,18 +42,49 @@ const TerminalHeader = () => {
 
 const TerminalBody = ({ containerRef, inputRef }) => {
   const [text, setText] = useState('');
-  const [completed, setCompleted] = useState(false);
-  const [error, setError] = useState(false);
+  const [response, setResponse] = useState(null); // State for dynamic response
 
   const handleSubmit = () => {
-    if (text.trim() === 'CA') {
-      setCompleted(true);
-      setError(false);
-      navigator.clipboard.writeText('0x02E739740B007bd5E4600b9736A143b6E794D223');
-      alert('CA copied to clipboard!');
-    } else {
-      setError(true);
+    const trimmedText = text.trim().toLowerCase();
+
+    switch (trimmedText) {
+      case 'ca':
+        navigator.clipboard.writeText('0x02E739740B007bd5E4600b9736A143b6E794D223');
+        setResponse('CA copied to clipboard!');
+        alert('CA copied to clipboard!');
+        break;
+
+      case 'bring bring':
+        setResponse("Gotcha, here's your link, get some bring and bring your friend: LINK");
+        break;
+
+      case 'list':
+        setResponse(
+          `Available commands:\n` +
+            `1. subscribe <email>\n` +
+            `2. claim $bring100x - claim your $bring\n` +
+            `3. claim $toshi25gh - claim your $toshi\n` +
+            `4. create bring - create drop`,
+        );
+        break;
+
+      case 'claim $bring100x':
+        setResponse("Gotcha, here's your link for collecting $bring100x: LINK");
+        break;
+
+      case 'claim $toshi25gh':
+        setResponse("Gotcha, here's your link for collecting $toshi25gh: LINK");
+        break;
+
+      case 'create bring':
+        setResponse("Here's your link for creating a drop: LINK");
+        break;
+
+      default:
+        setResponse('Invalid input. Type list to see all commands!');
+        break;
     }
+
     setText('');
   };
 
@@ -77,103 +108,75 @@ const TerminalBody = ({ containerRef, inputRef }) => {
         </span>{' '}
         0x02E739740B007bd5E4600b9736A143b6E794D223
       </p>
+
       <p className="whitespace-nowrap overflow-hidden font-light">
         ------------------------------------------------------------------------
       </p>
-      {!completed ? (
-        <>
-          <p>
-            stay tuned for the future updates <span className="text-green-500">(</span>
-            <span className="text-yellow-500">
-              type <span className="text-red-600">CA</span> to copy
-            </span>
-            <span className="text-green-500">)</span>:
-          </p>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleSubmit();
-            }}>
-            <input
-              ref={inputRef}
-              type="text"
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              className="sr-only"
-              autoComplete="off"
-            />
-            <p>
-              <span className="text-emerald-400">➜</span> <span className="text-cyan-300">~</span>{' '}
-              {text}
-              <motion.span
-                animate={{ opacity: [1, 1, 0, 0] }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 1,
-                  ease: 'linear',
-                  times: [0, 0.5, 0.5, 1],
-                }}
-                className="inline-block w-2 h-5 bg-slate-400 translate-y-1 ml-0.5"
-              />
-            </p>
-          </form>
-          {error && <p className="text-red-400">Incorrect answer. Try again!</p>}
-          <div className="flex flex-col items-center gap-3 pt-6 text-sm">
-            <a
-              href="https://x.com/MikhailDobs"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 hover:underline ">
-              X (Twitter)
-            </a>
-            <a
-              href="https://warpcast.com/~/channel/bring"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 hover:underline">
-              Farcaster
-            </a>
-            <a
-              href="https://dexscreener.com/base/0xceb9ce741dc04e87366198c7dc96d76ed74dce6c"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 hover:underline">
-              Dexscreener
-            </a>
-          </div>
-        </>
-      ) : (
-        <>
-          <p className="text-emerald-300">
-            <FiCheckCircle className="inline-block mr-2" />
-            <span> You are ready to bring, follow our socials to be updated 👇</span>
-          </p>
 
-          <div className="flex flex-col items-center gap-3 pt-6 text-sm">
-            <a
-              href="https://x.com/MikhailDobs"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 hover:underline">
-              X (Twitter)
-            </a>
-            <a
-              href="https://farcaster.xyz"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 hover:underline">
-              Farcaster
-            </a>
-            <a
-              href="https://dexscreener.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 hover:underline">
-              Dexscreener
-            </a>
-          </div>
-        </>
+      {!response && (
+        <div className="output text-emerald-400">
+          <p>
+            Type <span className="text-green-200">list</span> to see all commands
+          </p>
+        </div>
       )}
+
+      <div className="output text-emerald-400">
+        {response && response.split('\n').map((line, index) => <p key={index}>{line}</p>)}
+      </div>
+
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit();
+        }}>
+        <input
+          ref={inputRef}
+          type="text"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          className="sr-only"
+          autoComplete="off"
+        />
+        <p>
+          <span className="text-emerald-400">➜</span> <span className="text-cyan-300">~</span>{' '}
+          {text}
+          <motion.span
+            animate={{ opacity: [1, 1, 0, 0] }}
+            transition={{
+              repeat: Infinity,
+              duration: 1,
+              ease: 'linear',
+              times: [0, 0.5, 0.5, 1],
+            }}
+            className="inline-block w-2 h-5 bg-slate-400 translate-y-1 ml-0.5"
+          />
+        </p>
+      </form>
+
+      <div className="flex flex-col items-center gap-3 pt-6 text-sm">
+        <a
+          href="https://x.com/MikhailDobs"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-400 hover:underline ">
+          X (Twitter)
+        </a>
+        <a
+          href="https://warpcast.com/~/channel/bring"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-400 hover:underline">
+          Farcaster
+        </a>
+        <a
+          href="https://dexscreener.com/base/0xceb9ce741dc04e87366198c7dc96d76ed74dce6c"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-400 hover:underline">
+          Dexscreener
+        </a>
+      </div>
     </div>
   );
 };
