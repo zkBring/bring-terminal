@@ -154,6 +154,14 @@ const TerminalBody = ({ containerRef, inputRef }) => {
         </p>
       </form>
 
+      <div className="md:hidden flex justify-center items-center mt-4">
+        <button
+          onClick={handleSubmit}
+          className="bg-blue-500 text-white text-sm px-4 py-2 rounded-md shadow-md hover:bg-blue-600">
+          Send
+        </button>
+      </div>
+
       <div className="flex flex-col items-center gap-3 pt-6 text-sm">
         <a
           href="https://x.com/MikhailDobs"

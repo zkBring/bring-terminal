@@ -55,7 +55,23 @@ const App = () => {
   return (
     <>
       <div className="canvas-wrapper">
-        <Suspense fallback={<p>Bring is loading</p>}>
+        <Suspense
+          fallback={
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100vh',
+                backgroundColor: 'black',
+                color: 'white',
+                fontSize: '3rem',
+                fontFamily: '"Minecraft", sans-serif',
+                textAlign: 'center',
+              }}>
+              Bring is loading
+            </div>
+          }>
           <Canvas gl={{ alpha: true }} style={{ background: 'black' }}>
             <ambientLight intensity={0.5} />
             <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
