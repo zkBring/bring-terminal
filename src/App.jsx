@@ -1,17 +1,16 @@
-'use client';
+import { useState, useEffect, Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
+import { OrbitControls } from '@react-three/drei';
 import Text from './TextModels/Text1';
 import Text2 from './TextModels/Text2';
-import { useState, useEffect, Suspense } from 'react';
-import { OrbitControls } from '@react-three/drei';
-
 import Text3 from './TextModels/Text3';
 import Text4 from './TextModels/Text4';
 import TerminalContact from './components/HeroTerminal';
-import Banner from './TextModels/Logo';
 import PopUpAbout from './components/buttons/About';
 
 const App = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [positions, setPositions] = useState({
     text1: [-0.75, 0.6, 3.7],
     text2: [0.75, 0.6, 3.7],
@@ -23,7 +22,6 @@ const App = () => {
     const width = window.innerWidth;
 
     if (width <= 768) {
-      // Adjust positions for mobile screens
       setPositions({
         text1: [0, 1, 3],
         text2: [0, 0.3, 3],
@@ -31,7 +29,6 @@ const App = () => {
         text4: [0, -1, 3],
       });
     } else {
-      // Adjust positions for larger screens
       setPositions({
         text1: [-0.75, 0.6, 3.7],
         text2: [0.75, 0.6, 3.7],
@@ -42,13 +39,8 @@ const App = () => {
   };
 
   useEffect(() => {
-    // Set initial positions based on screen size
     updatePositions();
-
-    // Add event listener for resizing
     window.addEventListener('resize', updatePositions);
-
-    // Cleanup the event listener
     return () => {
       window.removeEventListener('resize', updatePositions);
     };
@@ -81,17 +73,39 @@ const App = () => {
             <Text2 position={positions.text2} />
             <Text3 position={positions.text3} />
             <Text4 position={positions.text4} />
-            {/* <Banner /> */}
             <OrbitControls />
           </Canvas>
         </Suspense>
       </div>
+
+      {/* Pass the click handler to PopUpAbout */}
       <div className="button-wrapper">
-        <PopUpAbout />
+        <PopUpAbout name="About" onClick={() => setIsModalOpen(true)} />
       </div>
-      <div className="terminal-wrapper">
-        <TerminalContact />
-      </div>
+
+      {/* Render modal or terminal based on state */}
+      {isModalOpen ? (
+        <div className="modal-wrapper">
+          <div className="modal bg-slate-950/60 p-6 rounded-lg shadow-lg w-11/12 md:w-2/3 max-w-2xl mx-auto">
+            <h1 className="text-2xl text-green-200 font-fc">About Bring</h1>
+            <p className="mt-4 font-fc text-neutral-300">
+              Bring is a platform designed to onboard billions of users to Web3 by simplifying
+              airdrops and engaging with users based on their Web2 activity. Powered by zkTLS.
+            </p>
+            <p className="mt-4 font-fc text-neutral-300">
+              The platform's mission is to make blockchain adoption seamless and intuitive for
+              everyone.
+            </p>
+            <div className="pt-6">
+              <PopUpAbout name="Close" onClick={() => setIsModalOpen(false)} />
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="terminal-wrapper">
+          <TerminalContact />
+        </div>
+      )}
     </>
   );
 };
