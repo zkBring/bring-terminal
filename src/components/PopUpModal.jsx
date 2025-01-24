@@ -33,7 +33,7 @@ const PopUpModal = ({ isOpen, onClose }) => {
         return (
           <div>
             <h2 className="text-xl font-fc text-green-200">Why Now?</h2>
-            <p className="mt-4 font-fc text-neutral-300">Coz there is no billions yet</p>
+            <p className="mt-4 font-fc text-neutral-300">To bring billions onchain</p>
           </div>
         );
       default:
