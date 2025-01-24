@@ -88,13 +88,11 @@ const App = () => {
         <div className="modal-wrapper">
           <div className="modal bg-slate-950/60 p-6 rounded-lg shadow-lg w-11/12 md:w-2/3 max-w-2xl mx-auto">
             <h1 className="text-2xl text-green-200 font-fc">About Bring</h1>
+            <p className="mt-4 font-fc text-neutral-300">Bring about to bring billions</p>
             <p className="mt-4 font-fc text-neutral-300">
-              Bring is a platform designed to onboard billions of users to Web3 by simplifying
-              airdrops and engaging with users based on their Web2 activity. Powered by zkTLS.
-            </p>
-            <p className="mt-4 font-fc text-neutral-300">
-              The platform's mission is to make blockchain adoption seamless and intuitive for
-              everyone.
+              bring bring bring bring bring bring bring bring bring bring bring bring bring bring
+              bring bring bring bring bring bring bring bring bring bring bring bring bring bring
+              bring bring bring bring bring bring
             </p>
             <div className="pt-6">
               <PopUpAbout name="Close" onClick={() => setIsModalOpen(false)} />
