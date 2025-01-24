@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 
-const PopUpAbout = ({ name, onClick }) => {
+const PopUpAboutBtn = ({ name, onClick }) => {
   const intervalRef = useRef(null);
   const TARGET_TEXT = name; // Dynamically update button text based on props
   const CYCLES_PER_LETTER = 2;
@@ -75,4 +75,4 @@ const PopUpAbout = ({ name, onClick }) => {
   );
 };
 
-export default PopUpAbout;
+export default PopUpAboutBtn;

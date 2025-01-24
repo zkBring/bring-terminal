@@ -6,7 +6,8 @@ import Text2 from './TextModels/Text2';
 import Text3 from './TextModels/Text3';
 import Text4 from './TextModels/Text4';
 import TerminalContact from './components/HeroTerminal';
-import PopUpAbout from './components/buttons/About';
+import PopUpAboutBtn from './components/buttons/About';
+import PopUpModal from './components/PopUpModal';
 
 const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -80,25 +81,12 @@ const App = () => {
 
       {/* Pass the click handler to PopUpAbout */}
       <div className="button-wrapper">
-        <PopUpAbout name="About" onClick={() => setIsModalOpen(true)} />
+        <PopUpAboutBtn name="About" onClick={() => setIsModalOpen(true)} />
       </div>
 
       {/* Render modal or terminal based on state */}
       {isModalOpen ? (
-        <div className="modal-wrapper">
-          <div className="modal bg-slate-950/60 p-6 rounded-lg shadow-lg w-11/12 md:w-2/3 max-w-2xl mx-auto">
-            <h1 className="text-2xl text-green-200 font-fc">About Bring</h1>
-            <p className="mt-4 font-fc text-neutral-300">Bring about to bring billions</p>
-            <p className="mt-4 font-fc text-neutral-300">
-              bring bring bring bring bring bring bring bring bring bring bring bring bring bring
-              bring bring bring bring bring bring bring bring bring bring bring bring bring bring
-              bring bring bring bring bring bring
-            </p>
-            <div className="pt-6">
-              <PopUpAbout name="Close" onClick={() => setIsModalOpen(false)} />
-            </div>
-          </div>
-        </div>
+        <PopUpModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       ) : (
         <div className="terminal-wrapper">
           <TerminalContact />
