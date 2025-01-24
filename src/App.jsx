@@ -1,13 +1,15 @@
 'use client';
 import { Canvas } from '@react-three/fiber';
-import Text from './models/Text1';
-import Text2 from './models/Text2';
+import Text from './TextModels/Text1';
+import Text2 from './TextModels/Text2';
 import { useState, useEffect, Suspense } from 'react';
 import { OrbitControls } from '@react-three/drei';
 
-import Text3 from './models/Text3';
-import Text4 from './models/Text4';
-import TerminalContact from './components/Hero';
+import Text3 from './TextModels/Text3';
+import Text4 from './TextModels/Text4';
+import TerminalContact from './components/HeroTerminal';
+import Banner from './TextModels/Logo';
+import PopUpAbout from './components/buttons/About';
 
 const App = () => {
   const [positions, setPositions] = useState({
@@ -79,9 +81,13 @@ const App = () => {
             <Text2 position={positions.text2} />
             <Text3 position={positions.text3} />
             <Text4 position={positions.text4} />
+            {/* <Banner /> */}
             <OrbitControls />
           </Canvas>
         </Suspense>
+      </div>
+      <div className="button-wrapper">
+        <PopUpAbout />
       </div>
       <div className="terminal-wrapper">
         <TerminalContact />
