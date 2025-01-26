@@ -119,10 +119,10 @@ const createShaderMaterial = () => {
         st.x *= aspect;
     
         vec3 spectrum[4];
-        spectrum[0] = vec3(0.0, 0.0, 0.5);  // Deep blue
-        spectrum[1] = vec3(0.0, 0.2, 0.8);  // Medium blue
+        spectrum[0] = vec3(0.0, 0.0, 1.0);  // Deep blue
+        spectrum[1] = vec3(0.0, 0.2, 1.0);  // Medium blue
         spectrum[2] = vec3(0.4, 0.6, 1.0);  // Light blue
-        spectrum[3] = vec3(1.0, 1.0, 1.0);  // White
+        spectrum[3] = vec3(0.0, 0.0, 0.9);  // White
     
         vec3 p = vec3(st.x - 0.5, st.y - 0.5, iTime);
         vec3 q, r;

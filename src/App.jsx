@@ -80,7 +80,6 @@ const App = () => {
             <Text position={positions.text1} />
             <Text2 position={positions.text2} />
             <Text3 position={positions.text3} />
-            {/* <Text4 position={positions.text4} /> */}
           </Canvas>
         </Suspense>
       </div>
