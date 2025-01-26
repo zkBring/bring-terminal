@@ -135,7 +135,7 @@ const Text3 = ({ position }) => {
       shaderMaterial.current.uniforms.iTime.value = clock.getElapsedTime();
     }
     if (groupRef.current) {
-      groupRef.current.rotation.x -= 0.01;
+      groupRef.current.rotation.x -= 0.005;
     }
   });
 

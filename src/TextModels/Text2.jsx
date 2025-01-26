@@ -151,7 +151,9 @@ const Text2 = ({ position }) => {
       shaderMaterial.current.uniforms.iTime.value = clock.getElapsedTime();
     }
     if (groupRef.current) {
-      groupRef.current.rotation.y -= 0.01;
+      const time = clock.getElapsedTime();
+      const angle = Math.sin(time / 2) * (Math.PI / 6); // Max rotation is ±45 degrees
+      groupRef.current.rotation.y = angle; // Apply the calculated angle
     }
   });
 
@@ -165,7 +167,7 @@ const Text2 = ({ position }) => {
 
   return (
     <group ref={groupRef} position={position}>
-      <Text3D ref={textRef} font="/font/px.json" size={0.3} height={0.05}>
+      <Text3D ref={textRef} font="/font/px.json" size={0.2} height={0.05}>
         <primitive attach="material" object={shaderMaterial.current} />
         BRING
       </Text3D>

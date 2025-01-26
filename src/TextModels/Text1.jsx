@@ -114,7 +114,9 @@ const Text = ({ position }) => {
       shaderMaterial.current.uniforms.iTime.value = clock.getElapsedTime();
     }
     if (groupRef.current) {
-      groupRef.current.rotation.y += 0.01;
+      const time = clock.getElapsedTime();
+      const angle = Math.sin(time) * (Math.PI / 4); // Max rotation is ±45 degrees
+      groupRef.current.rotation.x = angle; // Apply the calculated angle
     }
   });
 
@@ -174,7 +176,7 @@ const Text = ({ position }) => {
       onPointerOut={handlePointerUp}>
       <Text3D ref={textRef} font="/font/mc.json" size={0.3} height={0.05}>
         <primitive attach="material" object={shaderMaterial.current} />
-        BRING
+        BASE
       </Text3D>
     </group>
   );

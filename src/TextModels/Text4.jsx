@@ -129,7 +129,7 @@ const Text4 = ({ position }) => {
     <group ref={groupRef} position={position}>
       <Text3D ref={textRef} font="/font/super.json" size={0.3} height={0.05}>
         <primitive attach="material" object={shaderMaterial.current} />
-        BRING
+        on
       </Text3D>
     </group>
   );

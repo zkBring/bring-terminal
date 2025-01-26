@@ -13,10 +13,10 @@ const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [positions, setPositions] = useState({
-    text1: [-0.75, 0.6, 3.7],
-    text2: [0.75, 0.6, 3.7],
+    text1: [0.95, 0.6, 3.7],
+    text2: [-1, 0.6, 3.7],
     text3: [-0.9, -0.6, 3.7],
-    text4: [0.9, -0.6, 3.7],
+    text4: [0.95, 0.6, 3.7],
   });
 
   const updatePositions = () => {
@@ -24,17 +24,24 @@ const App = () => {
 
     if (width <= 768) {
       setPositions({
-        text1: [0, 1, 3],
-        text2: [0, 0.3, 3],
-        text3: [0, -0.4, 3],
+        text1: [0, 0, 3],
+        text2: [0, 1.2, 3],
+        text3: [0, -1, 3],
         text4: [0, -1, 3],
       });
-    } else {
+    } else if (width <= 1024) {
       setPositions({
-        text1: [-0.75, 0.6, 3.7],
-        text2: [0.75, 0.6, 3.7],
-        text3: [-0.9, -0.6, 3.7],
-        text4: [0.9, -0.6, 3.7],
+        text1: [0.9, 1, 3.2],
+        text2: [-0.8, 1, 3.2],
+        text3: [0, -0.6, 3.7],
+        text4: [0, 0.8, 3.2],
+      });
+    } else if (width > 1024) {
+      setPositions({
+        text1: [0.95, 0.7, 3.7],
+        text2: [-0.8, 0.7, 3.7],
+        text3: [0, -0.6, 3.7],
+        text4: [0, 0.8, 3.2],
       });
     }
   };
@@ -73,8 +80,7 @@ const App = () => {
             <Text position={positions.text1} />
             <Text2 position={positions.text2} />
             <Text3 position={positions.text3} />
-            <Text4 position={positions.text4} />
-            <OrbitControls />
+            {/* <Text4 position={positions.text4} /> */}
           </Canvas>
         </Suspense>
       </div>
